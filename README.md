@@ -177,14 +177,14 @@ python -c "import torch; print(torch.cuda.is_available())"
 
 This repository implements a comparative evaluation of **six approaches** for optic disc and cup segmentation:
 
-| Approach | Name in Results | Script | Description |
-|----------|----------------|--------|-------------|
-| **Central Model** | `central` | `centraltrain.sh` | Upper bound: trained on pooled multi-site data |
-| **Local Models** | `{dataset}_persite` | `persite.sh` | Lower bound: site-specific training only |
-| **Global Validation** | `pipeline1` | `pipeline1.sh` | FL with round-based training & global validation |
-| **Weighted Global Validation** | `pipeline2` | `pipeline2.sh` | FL with dataset-size weighted FedAvg |
-| **Onsite Validation** | `pipeline3` | `pipeline3.sh` | FL with onsite validation & early stopping |
-| **Fine-Tuned Onsite Validation** | `{dataset}_fl_finetuned` | `pipeline4.sh` | FL with site-specific fine-tuning |
+| Approach | Name in Results | Script |
+|----------|----------------|--------|
+| **Central Model** | `central` | `centraltrain.sh` | 
+| **Local Models** | `{dataset}_persite` | `persite.sh` |
+| **Global Validation** | `pipeline1` | `pipeline1.sh` | 
+| **Weighted Global Validation** | `pipeline2` | `pipeline2.sh` |
+| **Onsite Validation** | `pipeline3` | `pipeline3.sh` | 
+| **Fine-Tuned Onsite Validation** | `{dataset}_fl_finetuned` | `pipeline4.sh` |
 
 ---
 

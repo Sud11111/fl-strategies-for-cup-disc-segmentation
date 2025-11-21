@@ -138,7 +138,7 @@ fl-strategies-for-cup-disc-segmentation/
 - `driver/`: Shell scripts orchestrating training, inference, evaluation, and analysis
 - `engine/`: Python implementations of training algorithms and analysis tools
 - `metadata/`: CSV files defining train/val/test splits for each dataset
-- `models/`: Trained model checkpoints (not version-controlled due to size)
+- `models/`: Trained model checkpoints (not version-controlled due to size), weights available at https://huggingface.co/sud11111/Federated-Learning-Glaucoma/
 - `scores/`: Evaluation results (Dice scores) for all model-dataset combinations
 - `Statistics/`: Statistical comparison results (Wilcoxon tests, p-values)
 - `plots/`: Publication-ready visualizations of comparative performance

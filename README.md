@@ -7,7 +7,6 @@
 4. [Pipeline Descriptions](#pipeline-descriptions)
 5. [Running Experiments](#running-experiments)
 6. [Script Options Reference](#script-options-reference)
-7. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -546,74 +545,6 @@ Comprehensive plot generation.
 
 ---
 
-## 7. Troubleshooting
-
-### Common Issues
-
-#### 1. **Missing Dependencies**
-```bash
-# Error: ModuleNotFoundError: No module named 'statsmodels'
-pip install statsmodels==0.14.4
-
-# Error: CUDA out of memory
-# Solution: Reduce batch_size in training scripts
-```
-
-#### 2. **Checkpoint Not Found**
-```bash
-# Error: No checkpoint found in models/pipeline1/
-# Solution: Check training completed successfully or use --skip-training
-ls models/pipeline1/  # Should see .pth or .pt files
-```
-
-#### 3. **Different Results on Re-run**
-**Possible causes:**
-- Random seed not set
-- Different CUDA device
-- Model checkpoint from different epoch
-- Dataset normalization statistics changed
-
-### Performance Optimization
-
-**Training Faster:**
-```bash
-# Use parallel per-site training:
-./driver/persite.sh all parallel
-
-# Reduce num_epochs for testing:
-# Edit driver scripts: --num_epochs 10 (instead of 100)
-
-# Use fewer workers if RAM-limited:
-# Edit driver scripts: --num_workers 4 (instead of 16)
-```
-
-**Inference Faster:**
-```bash
-# Increase parallel processes (if GPU memory allows):
-# Edit driver scripts: --num_processes 4 (instead of 1)
-```
-
-### File Size Management
-
-**Large directories:**
-- `/tmp/flglaucomaseg_train/` - Training outputs (can be deleted after training)
-- `outputs/` - Prediction images (650MB per model)
-- `models/` - Model checkpoints (1GB per model)
-
-**Space-saving options:**
-```bash
-# Remove temporary training outputs:
-rm -rf /tmp/flglaucomaseg_train/
-
-# Remove prediction images (keep CSVs):
-find outputs -name "*.png" -delete
-
-# Keep only best checkpoint per model:
-# (Manually remove model_epoch*_ckpt.pt files except best)
-```
-
----
-
 ## Citation
 
 If you use this code or methodology in your research, please cite:
@@ -621,11 +552,31 @@ If you use this code or methodology in your research, please cite:
 ```bibtex
 @article{shrivastava2025federated,
   title={A Federated Learning-based Optic Disc and Cup Segmentation Model for Glaucoma Monitoring in Color Fundus Photographs},
-  author={Shrivastava, Sudhanshu and Thakuria, Upasana and Kinder, Scott and Nebbia, Giacomo and Zebardast, Nazlee and Baxter, Sally L. and Xu, Benjamin and Alryalat, Saif Aldeen and Kahook, Malik and Kalpathy-Cramer, Jayashree and Singh, Praveer},
+  author={Shrivastava, Sudhanshu MS and Thakuria, Upasana MS and Kinder, Scott MS and Nebbia, Giacomo PhD and Zebardast, Nazlee MD MPH and Baxter, Sally L. MD MSc and Xu, Benjamin MD PhD and Alryalat, Saif Aldeen MD and Kahook, Malik MD and Kalpathy-Cramer, Jayashree PhD and Singh, Praveer PhD},
   year={2025},
-  institution={University of Colorado Anschutz Medical Campus}
+  affiliation={1Ophthalmology, University of Colorado Anschutz Medical Campus, Aurora, Colorado; 2Massachusetts Eye and Ear Infirmary, Harvard Medical School, Massachusetts, United States; 3Division of Ophthalmology Informatics and Data Science, Viterbi Family Department of Ophthalmology and Shiley Eye Institute, University of California, San Diego, CA, USA; 4Division of Biomedical Informatics, Department of Medicine, University of California, San Diego, CA, USA; 5Roski Eye Institute, Keck School of Medicine, University of Southern California, Los Angeles, CA, USA}
 }
 ```
+
+**Authors:**
+- Shrivastava, Sudhanshu MS¹
+- Thakuria, Upasana MS¹
+- Kinder, Scott MS¹
+- Nebbia, Giacomo PhD¹
+- Zebardast, Nazlee MD MPH²
+- Baxter, Sally L. MD, MSc³,⁴
+- Xu, Benjamin MD PhD⁵
+- Aldeen Alryalat, Saif Aldeen MD¹
+- Kahook, Malik MD¹
+- Kalpathy-Cramer, Jayashree PhD¹
+- Singh, Praveer PhD¹
+
+**Affiliations:**
+1. Ophthalmology, University of Colorado Anschutz Medical Campus, Aurora, Colorado
+2. Massachusetts Eye and Ear Infirmary, Harvard Medical School, Massachusetts, United States
+3. Division of Ophthalmology Informatics and Data Science, Viterbi Family Department of Ophthalmology and Shiley Eye Institute, University of California, San Diego, CA, USA
+4. Division of Biomedical Informatics, Department of Medicine, University of California, San Diego, CA, USA
+5. Roski Eye Institute, Keck School of Medicine, University of Southern California, Los Angeles, CA, USA
 
 **Corresponding Author:**  
 Praveer Singh, PhD  
